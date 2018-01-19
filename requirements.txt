@@ -1,0 +1,6 @@
+dnspython==1.15.0
+ipaddress==1.0.19
+ipwhois==1.0.0
+pycountry==17.9.23
+six==1.11.0
+tld==0.7.9

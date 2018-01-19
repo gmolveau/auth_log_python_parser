@@ -1,4 +1,5 @@
-import csv, json, struct, ipaddress, pycountry, ipwhois, sys, re, time, socket, os, datetime
+import json, struct, sys, re, time, socket, os, datetime
+import ipaddress, pycountry, ipwhois
 from ipwhois import IPWhois
 from ipwhois.utils import get_countries
 from tld import get_tld
@@ -28,6 +29,9 @@ class SSHLog:
                 - provider[string]
                 - cidr [string]
                 - tld [string]
+            - auth_method
+                - text [string]
+                - integer [integer]
             - success
                 - text [string]
                 - integer [integer]
@@ -38,17 +42,17 @@ class SSHLog:
         self.line = line
         self.date = date
         self.date["integer"] = self.convert_date_to_unix()
-        self.username = = username
+        self.username = username
         self.source_ip = dict()
         self.source_ip['text'] = source_ip
         self.source_ip['integer'] = self.convert_ip_to_integer()
-        self.success = dict()
-        self.success['text'] = success
-        self.success['integer'] = 1 if success == "Accepted" else 0
+        self.whois = self.whois_from_ip()
         self.auth_method = dict()
         self.auth_method['text'] = "password" if success == "password" else "ssh_key"
         self.auth_method['integer'] = 0 if auth_method == "password" else 1
-        self.whois = self.whois_from_ip()
+        self.success = dict()
+        self.success['text'] = success
+        self.success['integer'] = 1 if success == "Accepted" else 0
         
         
     def convert_date_to_unix(self):
