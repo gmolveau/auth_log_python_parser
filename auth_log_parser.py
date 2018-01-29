@@ -5,11 +5,7 @@ from ipwhois.utils import get_countries
 from tld import get_tld
 
 asn_reader = geoip2.database.Reader('dbs/geolite2_asn.mmdb')
-# r = asn_reader.asn('2.2.2.2')
-# r.country.iso_code -> 'US'
 country_reader = geoip2.database.Reader('dbs/geolite2_country.mmdb')
-# r = country_reader.country('1.1.1.1')
-# r.autonomous_system_organization -> 'IBM'
 
 class SSHLog:
     """
